@@ -1,6 +1,7 @@
 //------------------------------------
 //          #IMPORTS
 //------------------------------------
+@import "directional";
 @import "config";
 @import "offsets";
 @import "manual-colspans";
@@ -85,7 +86,7 @@ html {
 
 [class*="col-"] {
     align-items: stretch;
-    float: left;
+    float: $left;
     width: 100%;
     position: relative;
     margin: 0;
