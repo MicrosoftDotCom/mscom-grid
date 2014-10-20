@@ -1,0 +1,394 @@
+//------------------------------------
+//          #IMPORTS
+//------------------------------------
+@import "config";
+@import "offsets";
+@import "manual-colspans";
+
+
+
+
+
+//Not assuming use of picchu or other library for box-sizing border-box
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+
+
+
+//------------------------------------
+//          #GRID, ROW, COL
+//------------------------------------
+.grid {
+    display: block;
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    max-width: $max-grid-width;
+    padding: 0 1em;
+    padding: 0 1vw;
+
+    &.full {
+        width:100%;
+        max-width: none;
+    }
+
+    &.fixed {
+        padding: 0 $fixed-col-margin;
+
+        .row {
+            margin: 0 -$fixed-col-margin;
+
+            & > [class*="col-"] {
+                padding-left: $fixed-col-margin;
+                padding-right: $fixed-col-margin;
+            }
+        }
+    }
+
+    &.zero-margin {
+        .row {
+            margin: 0;
+
+            & > [class*="col-"] {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -1em;
+        margin: 0 -1vw;
+        margin-bottom: 0;
+
+        &.content-flush {
+            margin: 0 -2em;
+            margin: 0 -2vw;
+        }
+    }
+
+    .row:after,
+    [class*="col-"]:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+[class*="col-"] {
+    align-items: stretch;
+    float: $left;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 1em 1em;
+    padding: -webkit-calc(1em + 0.5vh) 1vw;
+    padding: calc(1em + 0.5vh) 1vw;
+    &.centered {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+
+
+
+//------------------------------------
+//          #MOBILE FIRST SIZES
+//------------------------------------
+.col-1-3.nb {
+    width: percentage(1 / 3);
+}
+
+.col-2-3.nb {
+    width: percentage(2 / 3);
+}
+
+.col-1-2.nb,
+.col-2-4.nb,
+.col-1-8,
+.col-1-12,
+.col-1-16 {
+    width: percentage(1 / 2);
+}
+
+.col-1-4.nb {
+    width: percentage(1 / 4);
+}
+
+.col-3-4.nb {
+    width: percentage(3 / 4);
+}
+
+.col-1-5.nb {
+    width: percentage(1 / 5);
+}
+
+.col-1-6.nb,
+.col-1-24 {
+    width: percentage(1 / 6);
+}
+
+.col-1-8.nb {
+    width: percentage(1 / 8);
+}
+
+.col-1-12.nb {
+    width: percentage(1 / 12);
+}
+
+.col-1-16.nb {
+    width: percentage(1 / 16);
+}
+
+.col-1-24.nb {
+    width: percentage(1 / 24);
+}
+
+.col-2-8,
+.col-2-12,
+.col-4-12,
+.col-2-16,
+.col-4-16,
+.col-8-16 {
+    width: percentage(1);
+}
+
+
+
+
+
+//------------------------------------
+//          #MEDIA QUERIES
+//------------------------------------
+@media screen and (min-width: $vp1) {
+    .col-1-16 {
+        width: percentage(1 / 4);
+    }
+
+    .col-2-16 {
+        width: percentage(1 / 2);
+    }
+}
+
+@media screen and (min-width: $vp2) {
+    .col-1-4,
+    .col-1-6,
+    .col-1-8,
+    .col-2-12,
+    .col-6-24,
+    .col-6-24 + .preceding-col-6-24  {
+        width: percentage(1 / 2);
+    }
+
+    .col-1-3 {
+        width: percentage(1 / 3);
+    }
+
+    .col-2-3 {
+        width: percentage(2 / 3);
+    }
+
+    .col-1-12 {
+        width: percentage(1 / 4);
+    }
+
+    .col-3-6 + .col-1-6,
+    .col-2-4,
+    .col-2-6,
+    .col-4-8,
+    .col-3-4 + .col-1-4,
+    .preceding-col-1-4,
+    .preceding-col-6-24,
+    .preceding-col-6-24 ~ .col-6-24 {
+        width: percentage(1);
+    }
+
+    .col-1-24 {
+        width: percentage(1 / 12);
+    }
+}
+
+@media screen and (min-width: $vp3) {
+    .col-1-2,
+    .col-2-4,
+    .col-4-6 ~ .col-1-6,
+    .preceding-col-1-6,
+    .col-2-8,
+    .col-6-8 ~ .col-1-8,
+    .preceding-col-1-8,
+    .col-4-16,
+    .col-12-24 {
+        width: percentage(1 / 2);
+    }
+
+    .col-1-4,
+    .col-3-4 + .col-1-4,
+    .preceding-col-1-4,
+    .col-1-8,
+    .col-2-16,
+    .col-6-24,
+    .preceding-col-6-24,
+    .col-6-24 + .preceding-col-6-24,
+    .preceding-col-6-24 ~ .col-6-24  {
+        width: percentage(1 / 4);
+    }
+
+    .col-1-5 {
+        width: percentage(1 / 5);
+    }
+
+    .col-2-5 {
+        width: percentage(2 / 5);
+    }
+
+    .col-3-5 {
+        width: percentage(3 / 5);
+    }
+
+    .col-4-5 {
+        width: percentage(4 / 5);
+    }
+
+    .col-1-6,
+    .col-3-6 + .col-1-6  {
+        width: percentage(1 / 3);
+    }
+
+    .col-3-4,
+    .col-1-8 + .preceding-col-1-8 {
+        width: percentage(3 / 4);
+    }
+
+    .col-2-6,
+    .col-1-6 + .preceding-col-1-6 {
+        width: percentage(2 / 3);
+    }
+
+
+    .col-4-4,
+    .col-3-6,
+    .col-4-6,
+    .col-4-6 + .col-2-6,
+    .preceding-col-2-6,
+    .col-4-8,
+    .col-6-8,
+    .col-6-8 + .col-2-8,
+    .preceding-col-2-8,
+    .col-8-16  {
+        width: percentage(1);
+    }
+
+    .col-1-16 {
+        width: percentage(1 / 8);
+    }
+
+    .col-1-24 {
+        width: percentage(1 / 24);
+    }
+}
+
+@media screen and (min-width: $vp4) {
+    .col-4-6 + .col-2-6,
+    .preceding-col-2-6,
+    .col-2-6,
+    .col-4-12 {
+        width: percentage(1 / 3);
+    }
+
+    .col-4-6 ~ .col-1-6,
+    .preceding-col-1-6,
+    .col-1-6,
+    .col-3-6 + .col-1-6,
+    .col-1-6 + .preceding-col-1-6,
+    .col-2-12 {
+        width: percentage(1 / 6);
+    }
+
+    .col-6-8 + .col-2-8, 
+    .preceding-col-2-8,
+    .col-2-8,
+    .col-2-16 {
+        width: percentage(1 / 4);
+    }
+
+    .col-6-8 ~ .col-1-8,
+    .preceding-col-1-8,
+    .col-1-8 + .preceding-col-1-8,
+    .col-1-8,
+    .col-1-16 {
+        width: percentage(1 / 8);
+    }
+
+    .col-3-6,
+    .col-4-8,
+    .col-4-16 {
+        width: percentage(1 / 2);
+    }
+
+    .col-4-6 {
+        width: percentage(2 / 3);
+    }
+
+    .col-6-6,
+    .col-8-16 {
+        width: percentage(3 / 3);
+    }
+
+    .col-6-8 {
+        width: percentage(3 / 4);
+    }
+
+    .col-1-12 {
+        width: percentage(1 / 12);
+    }
+}
+
+@media screen and (min-width: $vp5) {
+    .col-1-16 {
+        width: percentage(1 / 16);
+    }
+
+    .col-2-16 {
+        width: percentage(1 / 8);
+    }
+
+    .col-4-16 {
+        width: percentage(1 / 4);
+    }
+
+    .col-8-16 {
+        width: percentage(1 / 2);
+    }
+}
+
+
+
+// Reducing padding to a reasonable size for "extremely" large displays
+@media screen and (min-width: 2000px) {
+    .grid {
+        padding: 0 1em;
+        padding: 0 0.5vw;
+        
+        .row {
+            margin: 0 -1em;
+            margin: 0 -0.5vw;
+
+            & > [class*="col-"] {
+                padding: 1em 1em;
+                padding: -webkit-calc(1em + 0.5vh) 0.5vw;
+                padding: calc(1em + 0.5vh) 0.5vw;
+            }
+        }
+    }
+}
