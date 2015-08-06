@@ -1,11 +1,15 @@
     @mixin row($padding) {
         .#{$grid-prefix}row {
-            margin-left: -$padding;
-            margin-right: -$padding;
+            @each $val in $padding {
+                margin-left: -$val;
+                margin-right: -$val;
+            }
 
             & > [class*="col-"] {
-                padding-left: $padding;
-                padding-right: $padding;
+                @each $val in $padding {
+                    padding-left: $val;
+                    padding-right: $val;
+                }
             }
         }
     }
@@ -16,7 +20,11 @@
         padding-right: 0;
         width: 100%;
         overflow-x: hidden;
-    }    
+    } 
+
+    &.fluid {
+        @include row($fluid-margin);
+    } 
 
     &.fixed {
         @include row($fixed-standard);
