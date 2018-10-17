@@ -304,3 +304,6 @@ Without doing anything, IE8 will show the mobile first view. If that is not acce
     <![endif]-->
 </head>
 ```
+
+### Sample column layout
+![Sample column layout as image](demo/img/msdotgrid-screenshot.png)
